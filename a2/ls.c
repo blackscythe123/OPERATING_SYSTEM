@@ -23,31 +23,45 @@ int main()
     {
         wait(NULL);
         close(fd[1]);
-        while ((bytes_read = read(fd[0], buffer, SIZE)) != 0) 
+        int output_fd = open("ls.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+        if (output_fd == -1) {
+            perror("File open failed");
+            exit(1);
+        }
+        while ((bytes_read = read(fd[0], buffer, SIZE)) > 0) 
         {
-            bytes_write=("ls.txt", buffer, bytes_read);
+            bytes_write=write(output_fd, buffer, bytes_read);
             if(bytes_write==-1)
             perror("write failed\n");
         }
         close(fd[0]);
+        close(output_fd); //
+
         int output=open("ls.txt",O_RDONLY,0644);
-        while((bytes_read=read(output,buffer,SIZE)>0))
+        if (output == -1) {
+            perror("Failed to reopen file for reading");
+            exit(1);
+        }
+        while((bytes_read=read(output,buffer,SIZE))>0)
         {
-            bytes_write=(1,buffer,bytes_read);
+            bytes_write=write(1,buffer,bytes_read);
             if(bytes_write==-1)
             perror("write failed\n");
         }
+        close(output);
+        
     }
     else if (pid==0)
     {
         close(fd[0]);
-        dup2(fd[1],1);
-        printf("dup2 success\n");
+        dup2(fd[1],STDOUT_FILENO);
+        close(fd[1]);
         if(execl("/bin/ls","ls","-l",NULL)==-1)
         {
         perror("invalid pathway using home path");
+        
+        exit(1);
         }
-        close(fd[1]);
     }
     else
     {
