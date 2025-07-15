@@ -1,8 +1,0 @@
-total 32
--rwxrwxrwx 1 web web 16424 Jul 15 23:01 a.out
--rwxrwxrwx 1 web web   947 Jul 15 22:36 fibbo.c
--rwxrwxrwx 1 web web  1120 Jul 15 22:36 file.c
--rwxrwxrwx 1 web web   665 Jul 15 22:36 input.txt
--rwxrwxrwx 1 web web  1728 Jul 15 23:01 ls.c
--rwxrwxrwx 1 web web   356 Jul 15 23:01 ls.txt
--rwxrwxrwx 1 web web   665 Jul 15 22:36 output.txt
