@@ -52,7 +52,7 @@ void displayResults(Patient patients[], int n, char* algorithm) {
 
     for (int i = 0; i < n; i++) {
         printf("%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%d\n",
-               (algorithm=="FCFS") ? patients[i].tokenNumber:i+1,
+               patients[i].tokenNumber,
                patients[i].arrivalTime,
                patients[i].burstTime,
                patients[i].waitingTime,
